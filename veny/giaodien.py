@@ -195,7 +195,11 @@ st.markdown(
 
 @st.cache_resource
 def load_vector_db():
-    embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embedding_model = HuggingFaceEmbeddings(
+        model_name="all-MiniLM-L6-v2",
+        model_kwargs={"device": "cpu"},
+        encode_kwargs={"device": "cpu"}
+    )
     return FAISS.load_local("vectorstores/db_faiss", embedding_model, allow_dangerous_deserialization=True)
 
 @st.cache_resource
