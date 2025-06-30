@@ -12,26 +12,20 @@ import torch.nn as nn
 import numpy as np
 import os
 import nltk
-nltk.download('punkt')
-nltk.download('punkt_tab')
 from nltk.stem import PorterStemmer
-
-# Tải tokenizer
-stemmer = PorterStemmer()
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
-
 import random
 import time
 import base64
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.embeddings import SentenceTransformersEmbeddings
 from langchain_community.vectorstores import FAISS
 import pandas as pd
 import io
@@ -87,17 +81,19 @@ def create_db_from_files():
     chunks = text_splitter.split_documents(documents)
 
     # Embedding
-    embedding_model = HuggingFaceEmbeddings(
+    embedding_model = SentenceTransformersEmbeddings(
         model_name="all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
         encode_kwargs={"device": "cpu"}
 )
 
+
     db = FAISS.from_documents(chunks, embedding_model)
     db.save_local(vector_db_path)
     return db
 
-create_db_from_files()
+if __name__ == "__main__":
+    create_db_from_files()
 
 # Định nghĩa dữ liệu intents
 intents = {
@@ -216,7 +212,7 @@ def load_vector_db():
 
 @st.cache_resource
 def load_large_llm():
-    return CTransformers(model="models/vinallama-7b-chat_q5_0.gguf", model_type="llama", max_new_tokens=1024, temperature=0.01)
+    return CTransformers(model="models/vinallama-7b-chat_q5_0.gguf", model_type="llama", max_new_tokens=512, temperature=0.01)
 
 db = load_vector_db()
 llm = load_large_llm()
