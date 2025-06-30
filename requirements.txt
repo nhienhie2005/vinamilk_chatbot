@@ -6,7 +6,7 @@ nltk
 torch
 pypdf
 sentence-transformers
-gpt4all
 faiss-cpu
-openai
 gdown
+langchain_community==0.0.14
+sentence-transformers==2.2.2
