@@ -32,8 +32,6 @@ import io
 import contextlib
 import sys
 
-# Tải tài nguyên NLTK
-nltk.download('punkt')
 stemmer = PorterStemmer()
 
 import os
@@ -66,7 +64,6 @@ if not os.path.exists("models/all-MiniLM-L6-v2-f16.gguf"):
 from langchain.text_splitter import RecursiveCharacterTextSplitter, CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain_community.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
 
 # Khai báo biến
 pdf_data_path = "data"
@@ -203,7 +200,7 @@ st.markdown(
 
 @st.cache_resource
 def load_vector_db():
-    embedding_model = HuggingFaceEmbeddings(
+    embedding_model = SentenceTransformersEmbeddings(
         model_name="all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
         encode_kwargs={"device": "cpu"}
