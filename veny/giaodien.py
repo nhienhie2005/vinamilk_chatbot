@@ -15,8 +15,12 @@ import nltk
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-
-
+# Tải tokenizer
+stemmer = PorterStemmer()
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 
 import random
 import time
