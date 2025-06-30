@@ -15,17 +15,7 @@ import nltk
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-# Thiết lập đường dẫn đến thư mục nltk_data cục bộ
-nltk_data_dir = os.path.join(os.path.dirname(__file__), "nltk_data")
-if not os.path.exists(nltk_data_dir):
-    os.makedirs(nltk_data_dir)
-nltk.data.path.append(nltk_data_dir)
 
-# Tải tài nguyên punkt nếu chưa có (chỉ chạy local, đã bao gồm trong repo)
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt', download_dir=nltk_data_dir)
 
 
 import random
