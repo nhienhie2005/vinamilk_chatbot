@@ -14,19 +14,14 @@ import os
 import nltk
 nltk.download('punkt')
 nltk.download('punkt_tab')
+from nltk.stem import PorterStemmer
 
-# Thiết lập đường dẫn đến thư mục nltk_data cục bộ
-nltk_data_dir = os.path.join(os.path.dirname(__file__), "nltk_data")
-if not os.path.exists(nltk_data_dir):
-    os.makedirs(nltk_data_dir)
-nltk.data.path.append(nltk_data_dir)
-
-# Tải tài nguyên punkt nếu chưa có (chỉ chạy local, đã bao gồm trong repo)
+# Tải tokenizer
+stemmer = PorterStemmer()
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt', download_dir=nltk_data_dir)
-
+    nltk.download('punkt')
 
 import random
 import time
