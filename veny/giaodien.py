@@ -78,7 +78,7 @@ def create_db_from_files():
     chunks = text_splitter.split_documents(documents)
 
     # Embedding
-    embedding_model = SentenceTransformersEmbeddings(
+    embedding_model = SentenceTransformerEmbeddings(
         model_name="all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
         encode_kwargs={"device": "cpu"}
@@ -200,7 +200,7 @@ st.markdown(
 
 @st.cache_resource
 def load_vector_db():
-    embedding_model = SentenceTransformersEmbeddings(
+    embedding_model = SentenceTransformerEmbeddings(
         model_name="all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
         encode_kwargs={"device": "cpu"}
