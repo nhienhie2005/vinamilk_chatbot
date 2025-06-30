@@ -2,6 +2,7 @@ ctransformers
 transformers
 langchain
 langchain-community
+nltk
 torch
 pypdf
 sentence-transformers
