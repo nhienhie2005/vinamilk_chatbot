@@ -13,11 +13,17 @@ import numpy as np
 import os
 import nltk
 
-# Thiết lập download cho NLTK
-nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
-os.makedirs(nltk_data_dir, exist_ok=True)
+# Thiết lập đường dẫn đến thư mục nltk_data cục bộ
+nltk_data_dir = os.path.join(os.path.dirname(__file__), "nltk_data")
+if not os.path.exists(nltk_data_dir):
+    os.makedirs(nltk_data_dir)
 nltk.data.path.append(nltk_data_dir)
-nltk.download('punkt', download_dir=nltk_data_dir)
+
+# Tải tài nguyên punkt nếu chưa có (chỉ chạy local, đã bao gồm trong repo)
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', download_dir=nltk_data_dir)
 
 import nltk
 nltk.download('punkt')
