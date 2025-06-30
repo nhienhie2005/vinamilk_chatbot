@@ -254,9 +254,11 @@ def chatbot(question):
     # Kiểm tra intents trước
     tokenized_question = tokenize(question)
     bag = bag_of_words(tokenized_question, all_words)
-    bag_tensor = torch.from_numpy(bag).float()
+    bag_tensor = torch.from_numpy(bag).float().to('cpu')
     
     with torch.no_grad():
+        model.eval()
+        model.to('cpu')
         output = model(bag_tensor)
         probabilities = torch.softmax(output, dim=0)
         predicted_index = torch.argmax(probabilities).item()
