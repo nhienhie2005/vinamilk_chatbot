@@ -12,6 +12,8 @@ import torch.nn as nn
 import numpy as np
 import os
 import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
 
 # Thiết lập đường dẫn đến thư mục nltk_data cục bộ
 nltk_data_dir = os.path.join(os.path.dirname(__file__), "nltk_data")
@@ -25,8 +27,7 @@ try:
 except LookupError:
     nltk.download('punkt', download_dir=nltk_data_dir)
 
-import nltk
-nltk.download('punkt')
+
 import random
 import time
 import base64
