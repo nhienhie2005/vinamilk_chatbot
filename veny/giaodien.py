@@ -25,7 +25,7 @@ except LookupError:
 from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-from langchain.embeddings import SentenceTransformersEmbeddings
+from langchain_community.embeddings import SentenceTransformersEmbeddings
 from langchain_community.vectorstores import FAISS
 import pandas as pd
 import io
