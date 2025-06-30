@@ -5,7 +5,7 @@ pandas
 gdown
 pypdf
 faiss-cpu
-sentence-transformers>=2.2.2
-sentencepiece
+sentence-transformers==2.2.2
+sentencepiece==0.1.99
 langchain_community==0.0.14
 ctransformers==0.2.27
