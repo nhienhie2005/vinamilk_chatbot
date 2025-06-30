@@ -1,3 +1,11 @@
+import torch
+
+# Patch toàn bộ torch.nn.Module.to để tránh lỗi CUDA trên Streamlit Cloud
+def patched_to(self, device):
+    return self  # Bỏ qua .to(), giữ nguyên ở CPU
+
+torch.nn.Module.to = patched_to
+
 import streamlit as st
 import torch
 import torch.nn as nn
