@@ -76,9 +76,11 @@ def create_db_from_files():
 
     # Embedding
     embedding_model = HuggingFaceEmbeddings(
-    model_name="all-MiniLM-L6-v2",
-    model_kwargs={"device": "cpu"}
+        model_name="all-MiniLM-L6-v2",
+        model_kwargs={"device": "cpu"},
+        encode_kwargs={"device": "cpu"}
 )
+
     db = FAISS.from_documents(chunks, embedding_model)
     db.save_local(vector_db_path)
     return db
