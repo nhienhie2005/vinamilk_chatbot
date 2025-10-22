@@ -41,6 +41,9 @@ os.makedirs("models", exist_ok=True)
 
 import gdown
 
+# ----------------------------------------
+# 2️⃣ Tải mô hình ngôn ngữ chính từ Hugging Face (ổn định, cache sẵn)
+# ----------------------------------------
 from huggingface_hub import hf_hub_download
 
 model_path = hf_hub_download(
@@ -48,7 +51,6 @@ model_path = hf_hub_download(
     filename="vinallama-7b-chat_q5_0.gguf",
     cache_dir="models"
 )
-
 print("✅ Model path:", model_path)
 
 
