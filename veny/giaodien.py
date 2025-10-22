@@ -41,14 +41,16 @@ os.makedirs("models", exist_ok=True)
 
 import gdown
 
-# Tải vinallama-7b-chat_q5_0.gguf
-if not os.path.exists("models/vinallama-7b-chat_q5_0.gguf"):
-    print("Downloading vinallama-7b-chat_q5_0.gguf from Google Drive...")
-    gdown.download(
-        id="1y6bUTofGFcQMtMjpLEqbe_R1DyAFyTi_",  
-        output="models/vinallama-7b-chat_q5_0.gguf",
-        quiet=False
-    )
+from huggingface_hub import hf_hub_download
+
+model_path = hf_hub_download(
+    repo_id="vilm/vinallama-7b-chat-GGUF",
+    filename="vinallama-7b-chat_q5_0.gguf",
+    cache_dir="models"
+)
+
+print("✅ Model path:", model_path)
+
 
 # Tải all-MiniLM-L6-v2-f16.gguf
 if not os.path.exists("models/all-MiniLM-L6-v2-f16.gguf"):
