@@ -41,17 +41,23 @@ os.makedirs("models", exist_ok=True)
 
 import gdown
 
-# ----------------------------------------
-# 2️⃣ Tải mô hình ngôn ngữ chính từ Hugging Face (ổn định, cache sẵn)
-# ----------------------------------------
-from huggingface_hub import hf_hub_download
+import os, requests
 
-model_path = hf_hub_download(
-    repo_id="vilm/vinallama-7b-chat-GGUF",
-    filename="vinallama-7b-chat_q5_0.gguf",
-    cache_dir="models"
-)
-print("✅ Model path:", model_path)
+os.makedirs("models", exist_ok=True)
+url = "https://huggingface.co/vilm/vinallama-7b-chat-GGUF/resolve/main/vinallama-7b-chat_q5_0.gguf"
+model_path = "models/vinallama-7b-chat_q5_0.gguf"
+
+if not os.path.exists(model_path):
+    print("🔽 Downloading model from Hugging Face...")
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(model_path, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+    print("✅ Download complete.")
+else:
+    print("✅ Model already exists, skipping download.")
+
 
 
 # Tải all-MiniLM-L6-v2-f16.gguf
